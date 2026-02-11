@@ -32,7 +32,18 @@ namespace LineComparison
         {
             Line l1 = new Line(1.0, 4.0, 4.0, 8.0);
             double Length = l1.CalculateLength();
-            Console.WriteLine(Length);
+         
+            Line line2 = new Line(0.0, 0.0, 3.0, 4.0);
+
+            
+            double length2 = line2.CalculateLength();
+
+            Console.WriteLine("UC1: Calculating Length of Lines");
+            Console.WriteLine($"Line 1: Point1({l1.X1}, {l1.Y1}) to Point2({l1.X2}, {l1.Y2})");
+            Console.WriteLine($"Length of Line 1: {Length:F2}");
+
+            Console.WriteLine($"\nLine 2: Point1({line2.X1}, {line2.Y1}) to Point2({line2.X2}, {line2.Y2})");
+            Console.WriteLine($"Length of Line 2: {length2:F2}");
         }
     }
 }
