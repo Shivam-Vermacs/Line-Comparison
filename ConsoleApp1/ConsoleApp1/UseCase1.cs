@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static LineComparison.UseCase1;
 
 namespace LineComparison
 {
@@ -27,14 +28,35 @@ namespace LineComparison
                 double lengthOfLine = Math.Sqrt(Math.Pow(X2 - X1, 2) + Math.Pow(Y2 - Y1, 2));
                 return lengthOfLine;
             }
+            public override bool Equals(object? obj)
+            {
+                
+                if (obj == null)
+                    return false;
+
+               
+                if (!(obj is Line))
+                    return false;
+
+                Line otherLine = (Line)obj;
+
+              
+                double thisLength = this.CalculateLength();
+                double otherLength = otherLine.CalculateLength();
+
+                
+                return Math.Abs(thisLength - otherLength) < 0.0001;
+            }
         }
         public static void Main(string[] args)
         {
             Line l1 = new Line(1.0, 4.0, 4.0, 8.0);
             double Length = l1.CalculateLength();
-         
+
             Line line2 = new Line(0.0, 0.0, 3.0, 4.0);
             double length2 = line2.CalculateLength();
+
+            Line line3 = new Line(2.0, 3.0, 5.0, 7.0);
 
             Console.WriteLine("UC1: Calculating Length of Lines");
             Console.WriteLine($"Line 1: Point1({l1.X1}, {l1.Y1}) to Point2({l1.X2}, {l1.Y2})");
@@ -42,6 +64,12 @@ namespace LineComparison
 
             Console.WriteLine($"\nLine 2: Point1({line2.X1}, {line2.Y1}) to Point2({line2.X2}, {line2.Y2})");
             Console.WriteLine($"Length of Line 2: {length2:F2}");
+
+            Console.WriteLine("UC2: Checking Equality of Lines based on Length");
+            Console.WriteLine($"Line 1 equals Line 2: {l1.Equals(line2)}");
+            Console.WriteLine($"Line 1 equals Line 3: {l1.Equals(line3)}");
+            Line line4 = new Line(0.0, 0.0, 1.0, 1.0);
+            Console.WriteLine($"Line 1 equals Line 4: {l1.Equals(line4)}");
         }
     }
 }
