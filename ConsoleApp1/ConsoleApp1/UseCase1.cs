@@ -30,22 +30,26 @@ namespace LineComparison
             }
             public override bool Equals(object? obj)
             {
-                
+
                 if (obj == null)
                     return false;
 
-               
+
                 if (!(obj is Line))
                     return false;
 
                 Line otherLine = (Line)obj;
 
-              
+
                 double thisLength = this.CalculateLength();
                 double otherLength = otherLine.CalculateLength();
 
-                
+
                 return Math.Abs(thisLength - otherLength) < 0.0001;
+            }
+            public override int GetHashCode()
+            {
+                return CalculateLength().GetHashCode();
             }
         }
         public static void Main(string[] args)
