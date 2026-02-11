@@ -34,8 +34,6 @@ namespace LineComparison
             double Length = l1.CalculateLength();
          
             Line line2 = new Line(0.0, 0.0, 3.0, 4.0);
-
-            
             double length2 = line2.CalculateLength();
 
             Console.WriteLine("UC1: Calculating Length of Lines");
