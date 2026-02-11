@@ -9,7 +9,7 @@ namespace LineComparison
 {
     internal class UseCase1
     {
-        public class Line
+        public class Line : IComparable<Line>
         {
             public double X1 { get; set; }
             public double Y1 { get; set; }
@@ -51,6 +51,25 @@ namespace LineComparison
             {
                 return CalculateLength().GetHashCode();
             }
+            public int CompareTo(Line other)
+            {
+                
+                if (other == null)
+                    return 1;
+
+                double thisLength = this.CalculateLength();
+                double otherLength = other.CalculateLength();
+
+                
+                if (Math.Abs(thisLength - otherLength) < 0.0001)
+                    return 0;  
+                else if (thisLength > otherLength)
+                    return 1;  
+                else
+                    return -1;
+            }
+
+
         }
         public static void Main(string[] args)
         {
@@ -74,6 +93,36 @@ namespace LineComparison
             Console.WriteLine($"Line 1 equals Line 3: {l1.Equals(line3)}");
             Line line4 = new Line(0.0, 0.0, 1.0, 1.0);
             Console.WriteLine($"Line 1 equals Line 4: {l1.Equals(line4)}");
+
+            int result1 = l1.CompareTo(line2);
+            Console.Write("Line 1 compared to Line 2: ");
+            if (result1 == 0)
+                Console.WriteLine("Lines are Equal");
+            else if (result1 > 0)
+                Console.WriteLine("Line 1 is Greater");
+            else
+                Console.WriteLine("Line 1 is Less");
+
+            
+            int result2 = l1.CompareTo(line3);
+            Console.Write("Line 1 compared to Line 3: ");
+            if (result2 == 0)
+                Console.WriteLine("Lines are Equal");
+            else if (result2 > 0)
+                Console.WriteLine("Line 1 is Greater");
+            else
+                Console.WriteLine("Line 1 is Less");
+
+            
+            int result3 = l1.CompareTo(line4);
+            Console.Write("Line 1 compared to Line 4: ");
+            if (result3 == 0)
+                Console.WriteLine("Lines are Equal");
+            else if (result3 > 0)
+                Console.WriteLine("Line 1 is Greater");
+            else
+                Console.WriteLine("Line 1 is Less");
+
         }
     }
 }
